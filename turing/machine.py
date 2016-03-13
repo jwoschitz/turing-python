@@ -9,16 +9,18 @@ from turing.transition import TransitionTable, Transition
 class UniversalTuringMachine(object):
     def __init__(self,
                  initial_state=None,
-                 accepting_states=[],
+                 accepting_states=None,
                  blank_symbol=None,
                  tape_data="",
-                 transition_data=[]):
+                 transition_data=None):
         self._current_state = initial_state
-        self._accepting_states = accepting_states
+        self._accepting_states = accepting_states if accepting_states else []
         self._tape = Tape(tape_data, blank_symbol)
         self._transitions = TransitionTable()
-        for transition_string in transition_data:
-            self._transitions.add_transition(Transition.from_data_string(transition_string))
+
+        if transition_data:
+            for transition_string in transition_data:
+                self._transitions.add_transition(Transition.from_data_string(transition_string))
 
     def run(self):
         while not self._current_state in self._accepting_states:
