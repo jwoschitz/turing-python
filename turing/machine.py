@@ -107,35 +107,4 @@ class UniversalTuringMachine(object):
             elif transition.tape_motion == TapeMotion.LEFT:
                 self._tape.left()
             self._current_state = transition.state_next
-        print(self._tape)
-
-
-utm = UniversalTuringMachine(
-    initial_state="q0",
-    accepting_states=["qf"],
-    tape_data="111",
-    blank_symbol="B",
-    transition_data=[
-        "q0 1 q0 1 R",
-        "q0 B qf 1 N",
-    ]
-)
-
-utm.run()
-
-utm = UniversalTuringMachine(
-    initial_state="a",
-    accepting_states=["halt"],
-    tape_data="",
-    blank_symbol="0",
-    transition_data=[
-        "a 0 b 1 R",
-        "a 1 c 1 L",
-        "b 0 a 1 L",
-        "b 1 b 1 R",
-        "c 0 b 1 L",
-        "c 1 halt 1 N",
-    ]
-)
-
-utm.run()
+        return self._tape
